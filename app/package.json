@@ -1,4 +1,8 @@
 {
   "name": "d-app",
-  "main": "src/main.js"
+  "main": "src/main",
+  "dependencies": {
+    "lodash.throttle": "^4.1.1",
+    "simple-virtual-dom": "^0.1.9"
+  }
 }

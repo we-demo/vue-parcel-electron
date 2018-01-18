@@ -16,11 +16,17 @@ function createWindow () {
   mainWindow = new BrowserWindow({width: 800, height: 600})
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  let webUrl
+  if (process.env.NODE_ENV === 'development') {
+    webUrl = 'http://localhost:1234'
+  } else {
+    webUrl = url.format({
+      pathname: path.join(electron.app.getAppPath(), 'build/web/index.html'),
+      protocol: 'file:',
+      slashes: true
+    })
+  }
+  mainWindow.loadURL(webUrl)
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
