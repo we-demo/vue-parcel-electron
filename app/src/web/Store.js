@@ -1,9 +1,9 @@
 export default class Store {
-  constructor () {
-    this.state = {
+  constructor (state) {
+    this.state = state || {
+      title: '',
       input: '',
-      arr: [1, 2, 3, 4, '<style>span { color: red }</style>', '<a href="1">123</a>', '<script>console.log(1)</script>'],
-      title: 'Hello World! <a href="1">123</a>'
+      arr: []
     }
   }
 

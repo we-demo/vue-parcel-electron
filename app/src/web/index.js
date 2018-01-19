@@ -6,7 +6,13 @@ import throttle from 'lodash.throttle'
 let root = document.querySelector('#root')
 let dom = null
 let cached = null
-let store = new Store()
+
+let state = {
+  title: 'Hello World! <a href="1">123</a>',
+  input: '',
+  arr: [1, 2, 3, 4, '<style>span { color: red }</style>', '<a href="1">123</a>', '<script>console.log(1)</script>']
+}
+let store = new Store(state)
 let wait = 100
 
 function render () {
@@ -37,9 +43,7 @@ function dispatch (type, ...args) {
 window.dispatch = dispatch
 
 if (module.hot) {
-  console.log('module.hot')
   module.hot.dispose(() => {
-    console.log('dispose')
     // module is about to be replaced
 
     // todo: save previous store.state
@@ -48,7 +52,6 @@ if (module.hot) {
   })
 
   module.hot.accept(() => {
-    console.log('accept')
     // module or one of its dependencies was just updated
 
     // todo: apply previous store.state
