@@ -2,6 +2,7 @@
   "name": "d-app",
   "main": "src/main",
   "dependencies": {
+    "dotenv": "^4.0.0",
     "lodash.throttle": "^4.1.1",
     "simple-virtual-dom": "^0.1.9"
   }

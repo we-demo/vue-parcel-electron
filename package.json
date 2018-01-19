@@ -1,14 +1,16 @@
 {
   "scripts": {
-    "dev": "run-p dev:*",
-    "dev:main": "cross-env NODE_ENV=development electron app --debug",
-    "dev:web": "parcel app/src/web/index.html -d dist/web",
-    "build": "run-s build:web build:mac",
+    "dev": "run-s dev:env && run-p dev:web dev:main",
+    "dev:env": "cp env/dev.env app/dist/.env",
+    "dev:main": "dotenv -e env/dev.env electron app --debug",
+    "dev:web": "dotenv -e env/dev.env parcel app/src/web/index.html",
+    "build": "run-s build:env build:web build:mac",
+    "build:env": "cp env/prod.env app/dist/.env",
     "build:web": "parcel build app/src/web/index.html -d app/dist/web --public-url ./",
     "build:mac": "electron-packager app --overwrite --ignore src\\/web$ --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist"
   },
   "devDependencies": {
-    "cross-env": "^5.1.3",
+    "dotenv-cli": "^1.4.0",
     "electron": "^1.7.10",
     "electron-packager": "^10.1.1",
     "npm-run-all": "^4.1.2",

@@ -1,7 +1,11 @@
 let { app, BrowserWindow } = require('electron')
 let path = require('path')
+let dotenv = require('dotenv')
 
 let appPath = app.getAppPath()
+let envFile = path.resolve(appPath, 'dist/.env')
+
+dotenv.load({ path: envFile })
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,7 +24,7 @@ function createWindow () {
   // and load the index.html of the app.
   let webUrl
   if (process.env.NODE_ENV === 'development') {
-    webUrl = 'http://localhost:1234'
+    webUrl = process.env.WEB_URL
   } else {
     let file = path.resolve(appPath, 'dist/web/index.html')
     webUrl = `file://${file}`
