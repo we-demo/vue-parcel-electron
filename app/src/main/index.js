@@ -1,11 +1,7 @@
-let electron = require('electron')
-// Module to control application life.
-let app = electron.app
-// Module to create native browser window.
-let BrowserWindow = electron.BrowserWindow
-
+let { app, BrowserWindow } = require('electron')
 let path = require('path')
-let url = require('url')
+
+let appPath = app.getAppPath()
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -13,18 +9,21 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      nodeIntegration: false
+    }
+  })
 
   // and load the index.html of the app.
   let webUrl
   if (process.env.NODE_ENV === 'development') {
     webUrl = 'http://localhost:1234'
   } else {
-    webUrl = url.format({
-      pathname: path.join(electron.app.getAppPath(), 'build/web/index.html'),
-      protocol: 'file:',
-      slashes: true
-    })
+    let file = path.resolve(appPath, 'dist/web/index.html')
+    webUrl = `file://${file}`
   }
   mainWindow.loadURL(webUrl)
 

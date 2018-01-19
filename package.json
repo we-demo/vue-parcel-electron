@@ -2,10 +2,10 @@
   "scripts": {
     "dev": "run-p dev:*",
     "dev:main": "cross-env NODE_ENV=development electron app --debug",
-    "dev:web": "parcel app/src/web/index.html -d app/dist/web",
+    "dev:web": "parcel app/src/web/index.html -d dist/web",
     "build": "run-s build:web build:mac",
-    "build:web": "parcel build app/src/web/index.html -d app/build/web --public-url ./",
-    "build:mac": "electron-packager app --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist"
+    "build:web": "parcel build app/src/web/index.html -d app/dist/web --public-url ./",
+    "build:mac": "electron-packager app --overwrite --ignore src\\/web$ --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist"
   },
   "devDependencies": {
     "cross-env": "^5.1.3",
