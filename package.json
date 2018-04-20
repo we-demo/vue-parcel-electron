@@ -2,7 +2,8 @@
   "scripts": {
     "dev": "run-s dev:env && run-p dev:web dev:main",
     "dev:env": "cp env/dev.env app/dist/.env",
-    "dev:main": "dotenv -e env/dev.env electron app --debug",
+    "dev:main": "dotenv -e env/dev.env run-s dev:main:inner",
+    "dev:main:inner": "sleep $PARCEL_WAIT && electron app --debu",
     "dev:web": "dotenv -e env/dev.env parcel app/src/web/index.html",
     "build": "run-s build:env build:web build:mac",
     "build:env": "cp env/prod.env app/dist/.env",
