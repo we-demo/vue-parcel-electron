@@ -1,5 +1,15 @@
+# node & npm
 node_modules
 package-lock.json
-out
-.cache
-dist
+yarn.lock
+
+# parcel dev cache & dist
+/.cache
+/dist
+
+# parcel build dist
+/app/dist
+!/app/dist/.gitkeep
+
+# electron-packager output
+/out
