@@ -13,3 +13,6 @@ yarn.lock
 
 # electron-packager output
 /out
+
+# test & coverage report
+/.coverage

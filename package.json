@@ -1,20 +1,41 @@
 {
   "scripts": {
+    "lint": "eslint --ext .js,.vue app/src",
+    "unit": "jest --config jest.conf.js --coverage",
+    "test": "run-s lint unit",
     "dev": "run-s dev:env && run-p dev:web dev:main",
     "dev:env": "cp env/dev.env app/dist/.env",
-    "dev:main": "dotenv -e env/dev.env run-s dev:main:inner",
-    "dev:main:inner": "sleep $PARCEL_WAIT && electron app --debu",
+    "dev:main": "dotenv -e env/dev.env electron app --debug",
     "dev:web": "dotenv -e env/dev.env parcel app/src/web/index.html",
     "build": "run-s build:env build:web build:mac",
     "build:env": "cp env/prod.env app/dist/.env",
     "build:web": "parcel build app/src/web/index.html -d app/dist/web --public-url ./",
-    "build:mac": "electron-packager app --overwrite --ignore src\\/web$ --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist"
+    "build:mac": "electron-packager app --overwrite --ignore \"(__test__|\\.map|src\\/web)$\" --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist"
   },
   "devDependencies": {
+    "@vue/component-compiler-utils": "^1.0.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^21.0.2",
+    "babel-plugin-dynamic-import-node": "^1.2.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "dotenv-cli": "^1.4.0",
     "electron": "^1.7.10",
     "electron-packager": "^10.1.1",
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-vue": "^4.0.0",
+    "jest": "^22.0.4",
+    "jest-serializer-vue": "^0.3.0",
     "npm-run-all": "^4.1.2",
-    "parcel-bundler": "^1.4.1"
+    "parcel-bundler": "^1.7.0",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-jest": "^2.4.1",
+    "vue-template-compiler": "^2.5.16"
   }
 }
