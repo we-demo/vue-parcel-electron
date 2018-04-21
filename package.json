@@ -19,7 +19,7 @@
     "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "dotenv-cli": "^1.4.0",
-    "electron": "^1.7.10",
+    "electron": "^1.8.4",
     "electron-packager": "^10.1.1",
     "eslint": "^4.15.0",
     "eslint-config-standard": "^10.2.1",
