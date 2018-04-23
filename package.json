@@ -1,16 +1,8 @@
 {
-  "scripts": {
-    "lint": "eslint --ext .js,.vue app/src",
-    "unit": "jest --config jest.conf.js --coverage",
-    "test": "run-s lint unit",
-    "dev": "run-s dev:env && run-p dev:web dev:main",
-    "dev:env": "cp env/dev.env app/dist/.env",
-    "dev:main": "dotenv -e env/dev.env electron app --debug",
-    "dev:web": "dotenv -e env/dev.env parcel app/src/web/index.html",
-    "build": "run-s build:env build:web build:mac",
-    "build:env": "cp env/prod.env app/dist/.env",
-    "build:web": "parcel build app/src/web/index.html -d app/dist/web --public-url ./",
-    "build:mac": "electron-packager app --overwrite --ignore \"(__test__|\\.map|src\\/web)$\" --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist"
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^1.0.0",
@@ -37,5 +29,20 @@
     "vue-hot-reload-api": "^2.3.0",
     "vue-jest": "^2.4.1",
     "vue-template-compiler": "^2.5.16"
-  }
+  },
+  "name": "electron-vue",
+  "scripts": {
+    "build": "run-s build:env build:web build:mac",
+    "build:env": "node app/copy-env.js",
+    "build:mac": "electron-packager app --overwrite --ignore \"(__test__|\\.map|src\\/web)$\" --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
+    "build:web": "parcel build app/src/web/index.html -d app/dist/web --public-url ./",
+    "dev": "run-s dev:env && run-p dev:web dev:main",
+    "dev:env": "node app/copy-env.js",
+    "dev:main": "dotenv -e env/dev.env electron app --debug",
+    "dev:web": "dotenv -e env/dev.env parcel app/src/web/index.html",
+    "lint": "eslint --ext .js,.vue app/src",
+    "test": "run-s lint unit",
+    "unit": "jest --config jest.conf.js --coverage"
+  },
+  "version": "0.0.1"
 }
