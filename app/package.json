@@ -1,9 +1,5 @@
 {
-  "name": "dapp",
   "main": "src/main",
-  "dependencies": {
-    "dotenv": "^4.0.0",
-    "vue": "^2.5.16",
-    "vue-router": "^3.0.1"
-  }
+  "name": "electron-vue",
+  "version": "0.0.1"
 }
